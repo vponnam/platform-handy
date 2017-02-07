@@ -1,4 +1,4 @@
-**cf marketplace service availabiity handling**
+**cf marketplace services Public/Private accessibility controls**
 
 
 By default most of the platform services are publicly visible, which means cf users with minimal space-developer permission can create service-instances.
