@@ -234,12 +234,12 @@ So in order to limit these services access, first the service has to be made non
 	   }
 	
 *Verify the same as below*
-	   Example:
-	   cf service-access
-	   broker: p-mysql
-	      service   plan                access   orgs
-	      p-mysql   pre-existing-plan   none
-
+	
+	Example:
+  	cf service-access
+	broker: p-mysql
+	service   plan                access   orgs
+	p-mysql   pre-existing-plan   none
 
 *Enbaling services to a specific org*
 
@@ -250,7 +250,7 @@ So in order to limit these services access, first the service has to be made non
 	Enabling access to plan pre-existing-plan of service p-mysql for org system as admin...
 	OK
 	
-	*Difference as below*
+*Difference as below*
 	cf service-access
 	Getting service access as admin...
 	broker: app-autoscaler
