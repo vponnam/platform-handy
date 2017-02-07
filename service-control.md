@@ -273,4 +273,4 @@ Enbaling services to a specific org
 	   p-service-registry            standard   none
 
 
-[Ref](https://docs.pivotal.io/pivotalcf/1-7/services/access-control.html)
+[Reference](https://docs.pivotal.io/pivotalcf/1-7/services/access-control.html)
