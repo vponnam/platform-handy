@@ -1,4 +1,4 @@
-*cf marketplace service availabiity restriction*
+**cf marketplace service availabiity handling**
 
 
 By default most of the platform services are publicly visible, which means cf users with minimal space-developer permission can create service-instances.
@@ -6,7 +6,7 @@ By default most of the platform services are publicly visible, which means cf us
 
 So in order to limit these services access, first the service has to be made non-public and then enabling access to respective orgs.
 
-cf service-access 	#To view current service access list
+`cf service-access` 	*To view current service access list*
 
 	Example:
 	cf service-access
@@ -32,7 +32,7 @@ cf service-access 	#To view current service access list
 	   p-service-registry            standard   none
 
 
-cf curl /v2/service_plans		#To retrive all services metadata
+`cf curl /v2/service_plans`		*To retrive all services metadata*
 
 	Example:
 	cf curl /v2/service_plans -X 'GET'
@@ -206,8 +206,9 @@ cf curl /v2/service_plans		#To retrive all services metadata
 	}
 
 
-Making a service non-public
-cf curl /v2/service_plans/<guid> -X 'PUT' -d '{"public":false}'
+*Making a service non-public*
+
+`cf curl /v2/service_plans/<guid> -X 'PUT' -d '{"public":false}'`
 	Example:
 	To make `MySQL` non-public
 
@@ -232,7 +233,7 @@ cf curl /v2/service_plans/<guid> -X 'PUT' -d '{"public":false}'
 	      "service_instances_url": "/v2/service_plans/cc7f40e1-dbfa-48fe-9e16-731a5ff728f4/service_instances"
 	   }
 	
-Verify the same as below
+*Verify the same as below*
 	   Example:
 	   cf service-access
 	   broker: p-mysql
@@ -240,7 +241,7 @@ Verify the same as below
 	      p-mysql   pre-existing-plan   none
 
 
-Enbaling services to a specific org
+*Enbaling services to a specific org*
 
 	cf enable-service-access p-mysql -p pre-existing-plan -o system
 	
