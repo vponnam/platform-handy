@@ -1,3 +1,5 @@
+Below instructions are for tracing container_id's logged by ASG to find their correspoding app, space and org details
+
 Create and bind ASG
 	
 	Sample process snippet
