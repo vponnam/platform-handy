@@ -1,10 +1,12 @@
 ##### Intructions for cleaning platform internal blobstore (nfs) using the *droplet-clean.sh* script.
 
-1. ssh into *nfs_server/0*	
+1. ssh into *nfs_server/0*
+
 	Ex:
 	bosh -d /var/tempest/workspaces/default/deployments/cf-deployment.yml ssh nfs_server/0
 	sudo -i
 2. clone the below gihub repo and execute the clean up script
+
 	git clone https://github.com/vponnam/platform-handy.git
 	cd platform-handy/nfs-cleanup/droplet-clean.sh
 	./droplet-clean.sh
@@ -22,7 +24,6 @@ A running application doesn't directly depend on it's corresponding droplet vers
 
 ######Caution: Not to try this in a production environment, play with a sandbox environment to understand the concept.
 
-######Note: `cf push/restage` creates a new droplet version. 
 ---
 ##### How to manually clean blobstore cache.
 
