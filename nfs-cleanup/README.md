@@ -32,7 +32,7 @@ cc-resources directory caches any large application files uploaded to the platfo
 `rm -rf /var/vcap/store/shared/cc-resources/*`
 
 Application buildpack_cache can be cleaned as below
-`/var/vcap/store/shared/cc-droplets/buildpack_cache/*`
+`rm -rf /var/vcap/store/shared/cc-droplets/buildpack_cache/*`
 
 ###### Note: Please do not delete the directories:  *cc-resources & cc-droplets/buildpack_cache*,  make sure only the contents in the folder are getting deleted.
 
