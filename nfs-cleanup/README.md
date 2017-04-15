@@ -2,15 +2,15 @@
 
 1. ssh into *nfs_server/0*
 
-	Ex:
-	bosh -d /var/tempest/workspaces/default/deployments/cf-deployment.yml ssh nfs_server/0
-	sudo -i
+		Ex:
+		bosh -d /var/tempest/workspaces/default/deployments/cf-deployment.yml ssh nfs_server/0
+		sudo -i
 	
 2. clone the below gihub repo and execute the clean up script
 
-	git clone https://github.com/vponnam/platform-handy.git
-	cd platform-handy/nfs-cleanup/droplet-clean.sh
-	./droplet-clean.sh
+		git clone https://github.com/vponnam/platform-handy.git
+		cd platform-handy/nfs-cleanup/droplet-clean.sh
+		./droplet-clean.sh
 	
 ##### What's actually happening in the script.
 
