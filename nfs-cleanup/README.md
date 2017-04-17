@@ -6,10 +6,15 @@
 		bosh -d /var/tempest/workspaces/default/deployments/cf-deployment.yml ssh nfs_server/0
 		sudo -i
 	
-2. clone the below gihub repo and execute the clean up script
+2. clone the below gihub repo and execute the sorting script
 
 		git clone https://github.com/vponnam/platform-handy.git
-		cd platform-handy/nfs-cleanup/droplet-clean.sh
+		cd platform-handy/nfs-cleanup/
+		./droplet-read.sh
+		
+3. After Performing a sanity check on the output from the above command, run the below cleanup script which will delete above found older droplets version id's
+
+		cd platform-handy/nfs-cleanup/
 		./droplet-clean.sh
 	
 ##### What's actually happening in the script.
