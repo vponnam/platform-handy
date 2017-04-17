@@ -12,9 +12,8 @@
 		cd platform-handy/nfs-cleanup/
 		./droplet-read.sh
 		
-3. After Performing a sanity check on the output from the above command, run the below cleanup script which will delete above found older droplets version id's
+3. After Performing a sanity check on the above output, run the below *cleanup* script which will delete above found older droplets version id's
 
-		cd platform-handy/nfs-cleanup/
 		./droplet-clean.sh
 	
 ##### What's actually happening in the script.
