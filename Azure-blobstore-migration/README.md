@@ -107,6 +107,6 @@ properties:
 3. Make sure the above `properties.cc` section, commented nfs's static_ip and instances are the only changes.
 4. If yes, it's safe to execute `bosh deploy` command.
 
-###### Note: If bosh complains about nfs_server's `instances` property, you have to uncomment it and change the value to `0` instead of 1, in order to deploy the changes. Please also make sure the data exists in the temporary VM's attached disk from snapshot before because changing instances count to 0 will delete nfs_vm.
+###### Note: If bosh complains about nfs_server's `instances` property, you have to uncomment it and change the value to `0` instead of 1, in order to deploy the changes. Please also make sure the data exists in the temporary VM's attached disk from snapshot before deploy because changing instances count to 0 will delete nfs_vm.
 
 [Azure Fog reference](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html#fog-azure)
