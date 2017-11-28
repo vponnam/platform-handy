@@ -67,7 +67,7 @@ If you are looking for some test apps, you can compile and push [spring-music](h
 Make sure the data is copied to Azure storage containers by logging into the portal and by clicking on the corresponding storage containers.
 
 ##### Step 8: Change cf manifest to point CloudController to external Azure fog.
-1. Replace the webdav section under properties.cc with AzureRM as below. Change `buildpack_directory_key`, `<azure_storage_account_name>` and `<storage-account-key>` values in the below snippet and add the section to the manifest.
+1. Replace the webdav section under properties.cc with AzureRM as below. Change `directory_key's`, `<azure_storage_account_name>` and `<storage-account-key>` values in the below snippet and add the section to the manifest.
 ```
 properties:
 	cc:
@@ -121,4 +121,4 @@ properties:
 
 If above validation checks are successful we're all set :+1:, and the blobstore migration to Azure storage is successfully completed and tested. Thanks for looking at this KB article.
 
-###### Note: It's also safe to remove nfs_server and the disk snapshot.
+###### Note: It's now safe to remove nfs_server and the disk snapshot and the temporary migration VM created in Step 2.
