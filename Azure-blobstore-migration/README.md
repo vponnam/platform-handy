@@ -116,8 +116,9 @@ properties:
 
 ##### Step 9: Validation
 1. Restarting an application will download the corresponding droplet from blobstore.
-	- So run `cf restart spring-music` #If you've pushed a different test app, change the name of the app (spring-music)
+	- So run `cf restart spring-music`
 2. Restaging will create a new droplet version by using previously pushed app packages and buildpacks cache.
- 	- Run `cf restage redis-example-app` #Change the app name, If you've pushed a different app.
+ 	- Run `cf restage redis-example-app`
+###### Note: If you've pushed different test apps, change the name of the apps (spring-music and redis-example-app)
 
-If above validation check are successful we're all set :+1:, and the blobstore migration to Azure storage is successfully completed and tested. Thanks for looking at this KB article.
+If above validation checks are successful we're all set :+1:, and the blobstore migration to Azure storage is successfully completed and tested. Thanks for looking at this KB article.
