@@ -121,4 +121,4 @@ properties:
 
 If above validation checks are successful we're all set :+1:, and the blobstore migration to Azure storage is successfully completed and tested. Thanks for looking at this KB article.
 
-###### Note: It's now safe to remove nfs_server, disk snapshot, temporary migration VM and it's associated Azure resources that are created in Step 2.
+###### Note: It's now safe to remove nfs_server, disk snapshot, temporary migration VM and it's associated Azure resources, which were created in Step 2.
