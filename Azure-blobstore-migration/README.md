@@ -67,13 +67,13 @@ If you are looking for some test apps, you can compile and push [spring-music](h
 Make sure the data is copied to Azure storage containers by logging into the portal and by clicking on the corresponding storage containers.
 
 ##### Step 8: Change cf manifest to point CloudController to external Azure fog.
-1. Replace the webdav section under properties.cc with AzureRM as below. Change `<azure_storage_account_name>` and `<storage-account-key>` values in the below snippet and add the section to the manifest.
+1. Replace the webdav section under properties.cc with AzureRM as below. Change `directory_key's`, `<azure_storage_account_name>` and `<storage-account-key>` values in the below snippet and add the section to the manifest.
 ```
 properties:
 	cc:
 		buildpacks:
 			blobstore_type: fog
-			buildpack_directory_key: cc-buildpacks
+			buildpack_directory_key: PreProdEast-buildpacks
 			fog_connection:
 				provider: AzureRM
 				environment: AzureCloud
@@ -82,7 +82,7 @@ properties:
 		droplets:
 			max_staged_droplets_stored: 2
 			blobstore_type: fog
-			droplet_directory_key: cc-droplets
+			droplet_directory_key: PreProdEast-droplets
 			fog_connection:
 				provider: AzureRM
 				environment: AzureCloud
@@ -91,7 +91,7 @@ properties:
 		packages:
 			max_package_size: 2147483648
 			blobstore_type: fog
-			app_package_directory_key: cc-packages
+			app_package_directory_key: PreProdEast-packages
 			fog_connection:
 				provider: AzureRM
 				environment: AzureCloud
@@ -99,18 +99,16 @@ properties:
 				azure_storage_access_key: <storage-account-key> #Replace me
 		resource_pool:
 			blobstore_type: fog
-			resource_directory_key: cc-resources
+			resource_directory_key: PreProdEast-resources
 			fog_connection:
 				provider: AzureRM
 				environment: AzureCloud
 				azure_storage_account_name: <storage-account-name> #Replace me
 				azure_storage_access_key: <storage-account-key> #Replace me
 ```
-2. Comment the `instances` and `static_ip` section of nfs_vm and run `bosh deploy cf-deployment`.
-3. Make sure the above `properties.cc` section, commented nfs's static_ip and instances are the only changes.
+2. `bosh deploy cf-deployment`.
+3. Make sure the above `properties.cc` section is the only change.
 4. If yes, it's safe to execute `bosh deploy` command.
-
-###### Note: If bosh complains about nfs_server's `instances` property, you have to uncomment it and change the value to `0` instead of 1, in order to deploy the changes. Please also make sure the data exists in the temporary VM's attached disk from snapshot before because changing instances count to 0 will delete nfs_vm.
 
 [Azure Fog reference](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html#fog-azure)
 
@@ -122,3 +120,5 @@ properties:
 ###### Note: If you've pushed different test apps, change the name of the apps (spring-music and redis-example-app)
 
 If above validation checks are successful we're all set :+1:, and the blobstore migration to Azure storage is successfully completed and tested. Thanks for looking at this KB article.
+
+###### Note: It's now safe to remove nfs_server, disk snapshot, temporary migration VM and it's associated Azure resources, which were created in Step 2.
