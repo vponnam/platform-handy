@@ -1,4 +1,4 @@
-#### Process for PCF internal nfs_server's data migration to Azure blobstorage.
+#### Process to migrate PCF internal nfs_server's data to Azure blobstorage.
 
 ###### Note: The given instructions expects basic familiarity working with Azure and Cloud Foundry.
 
@@ -13,6 +13,9 @@ Create Azure blob containers as mentioned in Step-2 [here](https://docs.pivotal.
 - PreProdEast-packages
 - PreProdEast-resources
 - PreProdEast-droplets
+
+##### Push couple of test applications for validation purpose after data migration.
+If you are looking for some test apps, you can compile and push [spring-music](https://github.com/vponnam/spring-music) and [redis](https://github.com/vponnam/cf-redis-example-app)
 
 ##### Step 1: Take a snapshot of nfs's persistent disk.
 1. Run `bosh vms cf-deployment --details` command to get the nfs_server vm_id.
@@ -56,15 +59,15 @@ Create Azure blob containers as mentioned in Step-2 [here](https://docs.pivotal.
 ##### Step 6: Use the installed AzCopy to migrate data to Azure blob containers.
 1. `azcopy --source /vcap/store/shared/cc-buildpacks --destination https://<storage-account-name>.blob.core.windows.net/cc-buildpacks   --dest-key <storage-account-key> --recursive`
 	- Replace `<storage-account-name>` and `<storage-account-key>` in the above command.
-2. Repeat the above AzCopy command for all 4 (buildpacks, droplets, packages, resources) containers by providing respective `--source`
+2. Repeat the above AzCopy command for 3 (buildpacks, droplets, packages) containers by providing respective `--sources`. cc-resources data need not be migrated and can safely be deleted as mentioned [here](https://discuss.pivotal.io/hc/en-us/articles/217982188-How-to-use-Elastic-Runtime-blob-storage-data-)
 
 [AzCopy usage reference](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-linux#blob-upload)
 
 ##### Step 7:
-Make sure the data is copied to Azure storage containers by logging into the portal and by looking at the storage containers.
+Make sure the data is copied to Azure storage containers by logging into the portal and by clicking on the corresponding storage containers.
 
 ##### Step 8: Change cf manifest to point CloudController to external Azure fog.
-1. Replace the webdav section under properties.cc with AzureRM as below. Change `<azure_storage_account_name>` and `<storage-account-key>` values from the below snippet and add the section to the manifest.
+1. Replace the webdav section under properties.cc with AzureRM as below. Change `<azure_storage_account_name>` and `<storage-account-key>` values in the below snippet and add the section to the manifest.
 ```
 properties:
 	cc:
@@ -107,6 +110,14 @@ properties:
 3. Make sure the above `properties.cc` section, commented nfs's static_ip and instances are the only changes.
 4. If yes, it's safe to execute `bosh deploy` command.
 
-###### Note: If bosh complains about nfs_server's `instances` property, you have to uncomment it and change the value to `0` instead of 1, in order to deploy the changes. Please also make sure the data exists in the temporary VM's attached disk from snapshot before deploy because changing instances count to 0 will delete nfs_vm.
+###### Note: If bosh complains about nfs_server's `instances` property, you have to uncomment it and change the value to `0` instead of 1, in order to deploy the changes. Please also make sure the data exists in the temporary VM's attached disk from snapshot before because changing instances count to 0 will delete nfs_vm.
 
 [Azure Fog reference](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html#fog-azure)
+
+##### Step 9: Validation
+1. Restarting an application will download the corresponding droplet from blobstore.
+	- So run `cf restart spring-music` #If you've pushed a different test app, change the name of the app (spring-music)
+2. Restaging will create a new droplet version by using previously pushed app packages and buildpacks cache.
+ 	- Run `cf restage redis-example-app` #Change the app name, If you've pushed a different app.
+
+If above validation check are successful we're all set :+1:, and the blobstore migration to Azure storage is successfully completed and tested. Thanks for looking at this KB article.
