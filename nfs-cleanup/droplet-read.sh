@@ -9,8 +9,6 @@ do
    ls -ltch $folder | awk 'NR>3 {print $9}' >> /tmp/idrms
 done
 
-# list the droplets
-for droplet in $(cat /tmp/idrms)
-do
-  echo "older version droplet found with id: $droplet"
-done
+# older droplet versions
+printf "\n*************\nTotal droplets with more than 2 versions are: $(cat /tmp/idrms | wc -l)\n"
+printf "File created with name: '/tmp/idrms' has all the droplet IDs\n*************\n"
